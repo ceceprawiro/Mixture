@@ -48,7 +48,7 @@ $ python mixture.py
 Cek hasil outputnya.
 
 ```
-$ sqlite data.db
+$ sqlite3 data.db
 sqlite> select * from user;
 ```
 
