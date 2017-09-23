@@ -22,7 +22,8 @@ $ sudo pip install virtualenv
 Clone repository ini ke folder yang diinginkan.
 
 ```
-git clone https://github.com/ceceprawiro/Mixture.git /path/to/Mixture```
+git clone https://github.com/ceceprawiro/Mixture.git /path/to/Mixture
+```
 
 Aktifkan virtualenv untuk folder tersebut.
 
