@@ -2,12 +2,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from mixer.backend.flask import mixer
 
-import time
-import sys
-import monoclock
+import os, errno, time, sys, monoclock
+
+filename = 'data.db'
+
+try:
+    os.remove(filename)
+except OSError:
+    pass
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///data.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + filename
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
@@ -26,18 +31,12 @@ class User(db.Model):
 
 size = 10
 
-'''
-with app.app_context():
-    db.create_all()
-    users = mixer.cycle(size).blend(User)
-'''
-
 db.create_all()
 index = 0
 while index < size:
     users = mixer.blend(User)
     index += 1
-    sys.stdout.write("\r%d%% complete" % round(index*100/size, 2))
+    sys.stdout.write("\r%d of %d recs generated (%d%%)" % (index, size, round(index*100/size)))
     sys.stdout.flush()
 
 t = monoclock.nano_count()
