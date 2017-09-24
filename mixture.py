@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from mixer.backend.flask import mixer
 
-import os, errno, time, sys, monoclock
+import os, errno, time, sys, time
 
 filename = 'data.db'
 
@@ -33,12 +33,12 @@ size = 10
 
 db.create_all()
 index = 0
+start = time.time()
 while index < size:
     users = mixer.blend(User)
     index += 1
-    sys.stdout.write("\r%d of %d recs generated (%d%%)" % (index, size, round(index*100/size)))
+    elapsed = round(time.time() - start, 2)
+    sys.stdout.write("\r%d of %d recs generated (%d%%) in %.2f secs" % (index, size, round(index*100/size), elapsed))
     sys.stdout.flush()
-
-t = monoclock.nano_count()
+    
 print ""
-print "Elapsed time", t/1e9, "secs"
