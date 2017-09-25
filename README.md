@@ -42,14 +42,14 @@ Download package yang dibutuhkan.
 ## Jalankan
 
 ```
-$ python mixture.py
+$ python app.py
 ```
 
 Cek hasil outputnya.
 
 ```
 $ sqlite3 data.db
-sqlite> select * from user;
+sqlite> select * from post;
 ```
 
 ## Links
